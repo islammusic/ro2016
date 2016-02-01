@@ -2,14 +2,14 @@
 
 Ne pozabit si razjasnit kaj pomeni MVC!
 
-* ## Ustvarimo novo rails aplikacijo
+* **Ustvarimo novo rails aplikacijo**
 
 ```
 rails new ro2016
 ```
 Ustvarile se vam bodo vse potrebne doatoteke za Rails aplikacijo. Bodite potrpežljivi :)
 
-* ## Pomaknete se v novo nastalo aplikacijo in poženete strežnik.
+* **Pomaknete se v novo nastalo aplikacijo in poženete strežnik.**
 
 ```
 cd ro2016
@@ -21,7 +21,7 @@ ker delamo v c9.io strežnik poženemo z ukazom
 rails s -p $PORT -b $IP
 ```
 
-* ## Ustvarimo novo tabelo za destinacije
+* **Ustvarimo novo tabelo za destinacije**
 
 ```
 rails generate scaffold destination name:string description:text picture:string
@@ -53,7 +53,7 @@ validates :games_played, numericality: { only_integer: true }
 ```
 Več najdeš na: http://guides.rubyonrails.org/active_record_validations.html
 
-* ## Naredimo autentifikacijo uporabnika
+* **Naredimo autentifikacijo uporabnika**
 
 V Gemfile dodamo polje za gem devise, ki služi za avtentifikacijo. Obstajajo še več drugih gem za to nalogo. Več o tem gem: https://github.com/plataformatec/devise
 
@@ -93,7 +93,7 @@ Prej smo pozabili še nastaviti, da naj bo naša začetna stran "/destinations".
 
 Preverite tako, da poženete strežnik in obiščite vašo aplikacijo. Brez prijave ne boste mogli dostopati do nje.
 
-* ##Ko uporabnik doda destinacijo, naj se doda v bazo prijavljeni uporabnik kot lastnik.
+* **Ko uporabnik doda destinacijo, naj se doda v bazo prijavljeni uporabnik kot lastnik.**
 
 Ustvariti moramo tuji ključ v bazi oz. povezavo med tabelama user in destination.
 ```
