@@ -2,14 +2,14 @@
 
 Ne pozabit si razjasnit kaj pomeni MVC!
 
-1. Ustvarimo novo rails aplikacijo
+* Ustvarimo novo rails aplikacijo
 
 ```
 rails new ro2016
 ```
 Ustvarile se vam bodo vse potrebne doatoteke za Rails aplikacijo. Bodite potrpežljivi :)
 
-2. Pomaknete se v novo nastalo aplikacijo in poženete strežnik.
+* Pomaknete se v novo nastalo aplikacijo in poženete strežnik.
 
 ```
 cd ro2016
@@ -21,7 +21,7 @@ ker delamo v c9.io strežnik poženemo z ukazom
 rails s -p $PORT -b $IP
 ```
 
-3. Ustvarimo novo tabelo za destinacije
+* Ustvarimo novo tabelo za destinacije
 
 ```
 rails generate scaffold destination name:string description:text picture:string
@@ -53,9 +53,42 @@ validates :games_played, numericality: { only_integer: true }
 ```
 Več najdeš na: http://guides.rubyonrails.org/active_record_validations.html
 
-4. 
-5. asdasd
-6. asdasdas
-7. asdasdasd
-8. asdasdas
+* Naredimo autentifikacijo uporabnika
 
+V Gemfile dodamo polje za gem devise, ki služi za avtentifikacijo. Obstajajo še več drugih gem za to nalogo. Več o tem gem: https://github.com/plataformatec/devise
+
+```
+# add gem for authentication
+gem 'devise'
+```
+Ne pozabit shranit Gemfile. Poženemo v terminalu ukaz, da se nam v okolje namesti devise
+```
+bundle install 
+```
+Nato nametimo devise v okolje, da v terminalu poženemo ukaz.
+```
+rails generate devise:install
+```
+Ustvarimo uporabnika z devise (naredil bo osnovno verzijo uporabnika).
+```
+rails generate devise user
+```
+Ker nam je ustvaril tudi tabelo user, moramo akcije izvršiti tudi nad bazo.
+```
+rake db:migrate
+```
+
+Gremo v app/controllers/application_controller.rb in dodamo vrstico ```before_filter :authenticate_user!```, da se autetikacija izvede vedno. Po dodani vrstici bo izgledala datoteka:
+
+```
+class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+  before_filter :authenticate_user!
+end
+```
+
+Prej smo pozabili še nastaviti, da naj bo naša začetna stran "/destinations". To uredimo tako, da v config/routes.rb poiščemo in odkomentiramo ```#root 'welcome#index'```, ter spremenimo v ```root 'destinations#index'```. 
+
+Preverite tako, da poženete strežnik in obiščite vašo aplikacijo. Brez prijave ne boste mogli dostopati do nje.
