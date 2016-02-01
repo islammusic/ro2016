@@ -24,7 +24,12 @@ class DestinationsController < ApplicationController
   # POST /destinations
   # POST /destinations.json
   def create
-    @destination = Destination.new(destination_params)
+    #@destination = Destination.new(destination_params)
+    
+    #zgoraj je orginal
+    #da ustvarimo povezavo, bo sedaj user ustvaril destinacijo in se bo zato shranil njegov tuji ključ
+    #v spremenljivki current_user je objekt trenutno prijavljenega uporabnika
+    @destination = current_user.destinations.build(destination_params)
 
     respond_to do |format|
       if @destination.save
@@ -40,6 +45,10 @@ class DestinationsController < ApplicationController
   # PATCH/PUT /destinations/1
   # PATCH/PUT /destinations/1.json
   def update
+    #opcijsko, če že imate vnešene kakšne destinacije, preden ste uredili prijavo in povezavo z uporabnikom
+    #potem bi ob vsakem urejanju se pod uporabnika vpisal uporabnik, ki trenutno ureja destinacijo
+    @destination.user = current_user
+    
     respond_to do |format|
       if @destination.update(destination_params)
         format.html { redirect_to @destination, notice: 'Destination was successfully updated.' }
