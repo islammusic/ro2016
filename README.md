@@ -217,6 +217,6 @@ end
 
 p.s. Dostop do rails konzole je z ukazom ```rails c```
 
-* ##Dodajanje slik destinacije
+* **Dodajanje slik destinacije**
 
 Gem spat :), nadaljujem drugič.
