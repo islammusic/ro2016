@@ -217,6 +217,37 @@ end
 
 p.s. Dostop do rails konzole je z ukazom ```rails c```
 
-* **Dodajanje slik destinacije**
+ 
+**Dodajanje slik destinacije**
 
-Gem spat :), nadaljujem drugič.
+
+ 1. Za dodajanje slike bomo uporabili gem ( gem 'carrierwave'), nato zaženite bundle install
+ 2. rails generate uploader Picture ->zgenerirate mapo
+ 3. rails g migration add_picture_to_users picture:string 
+ 4. zaženite rake db:migrate
+Dodate:
+   ``` class User < ActiveRecord::Base
+      mount_uploader :picture, PictureUploader
+    end ```
+
+še zadnja svar: potrebno je dodati upload  field v form primer:
+   
+
+ 
+
+   
+
+    <%= form_for @destination, :html =>{:multipart =>true} do |f| %>
+                          <%= f.text_field  :title %> <br>
+                          <%= f.text_area :description %><br>
+                          <%= f.file_field :image %><br>
+                    			 <%= f.button :submit %>
+                        <% end %>
+    
+
+
+
+
+
+
+
